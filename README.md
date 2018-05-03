@@ -1,2 +1,1 @@
 # AlgoCasts
-Algorithms about javascrpt
