@@ -1,5 +1,5 @@
 // --- Directions
-// Check to see if two provided strings are anagrams of eachother.
+// Check to see if two provided strings are anagrams of each other.
 // One string is an anagram of another if it uses the same characters
 // in the same quantity. Only consider characters, not spaces
 // or punctuation.  Consider capital letters to be the same as lower case
@@ -28,7 +28,11 @@ function anagrams(stringA, stringB) {
 function buildCharMap(str) {
   const charMap = {};
   for (let char of str.replace(/[^\w]/g, "").toLowerCase()) {
-    charMap[char] = charMap[char] + 1;
+    if (!charMap[char]) {
+      charMap[char] = 1;
+    } else {
+      charMap[char] = charMap[char] + 1;
+    }
   }
 
   return charMap;
