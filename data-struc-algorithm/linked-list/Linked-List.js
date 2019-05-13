@@ -5,6 +5,7 @@
    * @public
    * @constructor
    * @param {Object} 结点中的数据
+   * @双向链表示例
    */
   exports.Node = function(data) {
     /**
@@ -25,7 +26,7 @@
   };
 
   /**
-   * Linked list 链表
+   * Linked list 双向链表 初始化头结点和 尾结点
    *
    * @public
    * @constructor
@@ -48,11 +49,12 @@
     if (this.first === null) {
       this.first = this.last = node;
     } else {
-      // 向链表尾部追加数据，新的结点作为尾结点，它的prev就是原来的尾节点；原先的尾节点的next 变为新node
+      // 向链表尾部追加数据，新的结点作为尾结点，
+      // 它的prev就是原来的尾节点；原先的尾节点的next 变为新node
       var temp = this.last;
       this.last = node;
       node.prev = temp;
-      node.next = node;
+      temp.next = node;
     }
   };
 
@@ -109,15 +111,18 @@
       if (temp.data === data) {
         next = temp.next;
         prev = temp.prev;
+        // 两个结点的边界情况
         if (next) {
           next.prev = prev;
         }
         if (prev) {
           prev.next = next;
         }
+        // 处理头结点的边界情况
         if (temp === this.first) {
           this.first = next;
         }
+        // 处理尾结点的边界情况
         if (temp === this.last) {
           this.last = prev;
         }
@@ -129,19 +134,23 @@
   };
 
   /**
-   * 检查 linked list 是否有循环
+   * 检查 linkedList 是否有环
    *
    * @public
    * @method
-   * @return {Boolean} 返回true 如果 linked list 含有循环
+   * @return {Boolean} 返回true 如果 linkedList 有环
    */
   exports.linkedList.prototype.hasCycle = function() {
+    // 思路就是用两个指针，一个跑的快，一个跑的慢，如果有环的话，跑的快的一定会追上慢的
+    // 每次循环，fast跑两次，slow 跑一次
     var fast = this.first;
-    var slow = this.last;
+    var slow = this.first;
     while (true) {
+      // 快指针为空
       if (fast === null) {
         return false;
       }
+      // 快指针的第二个结点为空
       fast = fast.next;
       if (fast === null) {
         return false;
@@ -217,6 +226,7 @@
    * @method
    */
   exports.linkedList.prototype.reverse = function() {
+    // 边界: 链表结点少于 1
     if (!this.first || !this.first.next) {
       return;
     }
@@ -224,10 +234,13 @@
     var next;
     do {
       next = current.next;
+      // 反转链表 当前结点 next 指针指向 当前结点 prev结点，
+      // 当前结点 prev 指向当前结点 下一个结点
       current.next = current.prev;
       current.prev = next;
       current = next;
     } while (next);
+    // 头结点 尾结点变换
     var tmp = this.first;
     this.first = this.last;
     this.last = tmp;
