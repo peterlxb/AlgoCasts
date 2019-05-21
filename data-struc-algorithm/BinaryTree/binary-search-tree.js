@@ -52,31 +52,59 @@
   exports.BinaryTree.prototype.insert = function(value, current) {};
 
   /**
-   * In-order traversal from given node
+   * In-order traversal from given node 中序遍历
    *
+   * 对于树中的任意节点，先打印它的左子树，然后打印本身，最后打印右子树
    * @private
    * @param {Node} current Node from which to start the traversal.
    * @param {Function} callback Callback which will be called for each traversed node
    */
-  exports.BinaryTree.prototype._inorder = function(current, callback) {};
+  exports.BinaryTree.prototype._inorder = function(current, callback) {
+    if (!current) {
+      return;
+    }
+
+    // 处理左子树
+    this.inorder(current._left, callback);
+    if (typeof callback === "function") {
+      // 处理自身
+      callback(current);
+    }
+    // 处理右子树
+    this._inorder(current._right, callback);
+  };
 
   /**
-   * In-order traversal of the whole binary search tree.
+   * In-order traversal of the whole binary search tree. 中序遍历整个二叉树
    *
    * @public
    * @method
    * @param {Function} callback Callback which will be called for each traversed node
    */
-  exports.BinaryTree.prototype.inorder = function(callback) {};
+  exports.BinaryTree.prototype.inorder = function(callback) {
+    return this._inorder(this._root, callback);
+  };
 
   /**
-   * Post-order traversal from given node.
+   * Post-order traversal from given node. 后序遍历
    *
+   * 对于树中的任意节点，先打印它的左子树，然后打印右子树，最后打印自身
    * @private
    * @param {Node} current Node from which to start the traversal.
    * @param {Function} callback Callback which will be called for each traversed node
    */
-  exports.BinaryTree.prototype._postorder = function(current, callback) {};
+  exports.BinaryTree.prototype._postorder = function(current, callback) {
+    if (!current) {
+      return;
+    }
+    // 分别处理 左子树，右子树
+    this._postorder(current._left, callback);
+    this._postorder(current._right, callback);
+    if (typeof callback === "function") {
+      // 处理自身
+      callback(current);
+    }
+  };
 
   /**
    * Post-order traversal of the whole tree.
@@ -84,24 +112,42 @@
    * @public
    * @param {Function} callback Callback which will be called for each traversed node
    */
-  exports.BinaryTree.prototype.postorder = function(callback) {};
+  exports.BinaryTree.prototype.postorder = function(callback) {
+    return this._postorder(this._root, callback);
+  };
 
   /**
-   * Pre-order traversal of the tree from given node.
+   * Pre-order traversal of the tree from given node. 前序遍历
    *
+   * 对于树中的任意节点，先打印它自身，然后打印左子树，最后打印右子树
    * @private
    * @param {Node}
    * @param {Function}
    */
-  exports.BinaryTree.prototype._preorder = function(current, callback) {};
+  exports.BinaryTree.prototype._preorder = function(current, callback) {
+    if (!current) {
+      return;
+    }
+
+    if (typeof callback === "function") {
+      // 先处理自身
+      callback(current);
+    }
+
+    // 再分别处理左子树，右子树
+    this._preorder(current._left, callback);
+    this._postorder(current._right, callback);
+  };
 
   /**
-   * Pre-order traversal of the whole tree.
+   * Pre-order traversal of the whole tree. 前序遍历
    *
    * @public
    * @param {Function} callback Callback which will be called for each traversed node.
    */
-  exports.BinaryTree.prototype.preorder = function(callback) {};
+  exports.BinaryTree.prototype.preorder = function(callback) {
+    return this._postorder(this._root, callback);
+  };
 
   /**
    * Finds a node by its value
