@@ -1,3 +1,5 @@
+import org.graalvm.compiler.graph.Node;
+
 /**
  * 1) 单链表反转 2) 链表中环的检测 3) 两个有序链表合并 4) 删除链表倒数第n 个结点 5) 求链表的中间结点
  */
@@ -34,6 +36,66 @@ public class LinkedListAlgorithm {
         return true;
     }
     return false;
+  }
+
+  // 返回环中的第一个结点，如果有环
+  public static Node detectCycle(Node list) {
+    if (list == null) {
+      return null;
+    }
+
+    Node slow = list, fast = head, start = head;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+
+      if (slow == fast) {
+        while (slow != start) {
+          slow = slow.next;
+          start = start.next;
+        }
+        return start;
+      }
+    }
+    return null;
+  }
+
+  // 每 K个一组翻转链表
+  public static Node reverseKGroup(Node head, int k) {
+    if (head == null || k == 0) {
+      return head;
+    }
+
+    Node fake = new Node(0);
+    fake.next = head;
+    Node prev = fake;
+    int i = 0;
+
+    Node p = head;
+    while (p != null) {
+      i++;
+      if (i % k == 0) {
+        prev = swap(prev, p.next);
+        p = prev.next;
+      } else {
+        p = p.next;
+      }
+    }
+    return fake.next;
+  }
+
+  public static Node swap(Node prev, Node next) {
+    Node last = prev.next;
+    Node curr = last.next;
+
+    while (curr != next) {
+      last.next = curr.next;
+      curr.next = prev.next;
+      prev.next = curr;
+      curr = last.next;
+    }
+    return last;
   }
 
   // 有序链表合并
