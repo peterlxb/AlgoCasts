@@ -1,22 +1,30 @@
 /**
- * Hash 表
+ * 散列表
  *
  * 一个关联数组(associative array),
  * 可以通过键(字符串和数字)映射到表中的值。
  *
- * @ 使用示例
- * @ 引入这个module const hash = require("path-to-module/hash-table");
- * @ const hashTable = new hash.Hashtable();
+ * @example
+ * const hash = require("path-to-module/hash-table");
+ * const hashTable = new hash.Hashtable();
  *
- * @ hashTable.put(10, 'value');
- * @ console.log(hashTable.get(10));
- * @ hashTable.remove(10);
+ * hashTable.put(10, 'value');
+ * hashTable.put('key', 10);
+ * console.log(hashTable.get(10)); // 'value'
+ * console.log(hashTable.get('key')); // 10
+ *
+ * hashTable.remove(10);
+ * hashTable.remove('key');
+ *
+ * console.log(hashTable.get(10)); // undefined
+ * console.log(hashTable.get('key')); // undefined
  */
 
 (function(exports) {
   /**
    * 构造一个Node 在hash-table中保存数据和以及前一个或下一个的nodes
    *
+   * @public
    * @constructor
    * @param { Number|String } key 参数是node的键
    * @param { Number|String } data 参数是要存储在hash table中的数据
@@ -31,6 +39,7 @@
   /**
    * 构造一个Hash Table
    *
+   * @public
    * @constructor
    */
   exports.Hashtable = function() {
@@ -41,8 +50,9 @@
 
   /**
    * 用于hash键 的简单非加密hash，用来确定在bucket中放入值的时间。
-   *
-   * Java的 32bitint 哈希的javascript实现。
+   *Java的 32bitint 哈希的javascript实现。
+
+   * @public
    * @method
    * @param {Number|String} 参数val 是key用来生成hash值。
    */
@@ -51,14 +61,14 @@
     let hashCode = 0;
     let character;
     // 如果要hash的值已经是一个整数，直接返回
-    if (val.length == 0 || val.length == undefined) {
+    if (val.length === 0 || val.length === undefined) {
       return val;
     }
     // do some logical here
     for (i = 0; i < val.length; i++) {
       character = val.charCodeAt(i);
       hashCode = (hashCode << 5) - hashCode + character;
-      hashCode = hashCode && hashCode;
+      hashCode = hashCode & hashCode;
     }
 
     return hashCode;
