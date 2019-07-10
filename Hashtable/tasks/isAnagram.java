@@ -1,5 +1,5 @@
 /** 
- * 判断是否是有效的anagram 
+ * 判断是否是有效的anagram 回文 
    Input: s = "anagram", t = "nagaram"
    Output: true
 
@@ -9,7 +9,7 @@
 
 class Solution {
     public boolean isAnagram(String s, String t) {
-        // use hash table
+        // 使用hash table
         if (s.length() != t.length()) {
             return false;
         }

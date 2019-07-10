@@ -5,7 +5,7 @@
    因为 nums[0] + nums[1] = 2 + 7 = 9,
    返回 [0, 1].
 
-   使用哈希表
+   使用哈希表 hashMap 的查找是 O(1)，时间复杂度就是O(N)
  */
 
 class Solution {
