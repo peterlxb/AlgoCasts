@@ -1,4 +1,3 @@
-
 // 定义一个 binary tree node.
 public class TreeNode {
   int val;
@@ -30,6 +29,7 @@ public class TreeNode {
   Explanation: 根结点的值是5，右子树有4
   */
  class Solution {
+
    public boolean helper(TreeNode root, Integer min, Integer max) {
      if (root == null) return true;
      if (min != null && root.val <= min) return false;
@@ -38,7 +38,30 @@ public class TreeNode {
      return helper(root.left, min, root.val) && helper(root.right, root.val, max);
    }
 
-   public boolean isValidBST(TreeNode root) {
+   public boolean isValidBSTOne(TreeNode root) {
      return helper(root, null, null);
    }
+
+   // 采用中序遍历的方式检查是不是合法二叉搜索树
+   // 根据二叉搜索树定义，每个元素都要比下一个元素小，
+   public boolean isValidBST(TreeNode root) {
+       Stack<TreeNode> stack = new Stack();
+       double inorder = - Double.MAX_VALUE;
+       
+       while (!stack.isEmpty() || root != null) {
+          while (root != null) {
+             stack.push(root);
+             root = root.left;
+         }
+         root = stack.pop();
+         // If next element in inorder traversal 
+         // is smaller than previous one
+         // that's not BST
+          if (root.val <= inorder) return false;
+          inorder = root.val;
+          root = root.right;
+      }
+       return true;
+   }
+
  }
