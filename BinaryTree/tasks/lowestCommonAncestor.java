@@ -37,3 +37,35 @@ class Solution {
         return left == null ? right : right == null ? left: root;
     }
 }
+
+// 二叉搜索树的版本
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // value of p
+        int pVal = p.val;
+        
+        // value of q
+        int qVal = q.val;
+        
+        // start from the root node of the tree
+        TreeNode node = root;
+        
+        // 遍历树
+        while (node != null) {
+            // Value of ancestor/parent node
+            int parentVal = node.val;
+            
+            if (pVal > parentVal && qVal > parentVal) {
+                // if p and q are greater than parent
+                node = node.right;
+            } else if (pVal < parentVal && qVal < parentVal) {
+                // lesser than parent 
+                node = node.left;
+            } else {
+                // found the split point
+                return node;
+            }
+        }
+        return null;
+    }
+}

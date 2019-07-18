@@ -44,3 +44,39 @@ class Solution(object):
         while q not in ans:
             q = parent[q]
         return q
+
+# 二叉搜索树版本
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        # value of p
+        p_val = p.val
+        
+        # value of q
+        q_val = q.val
+        
+        # start from the root node of the tree
+        node = root
+        
+        # 遍历树
+        while node:
+            parent_val = node.val
+            
+            if p_val > parent_val and q_val > parent_val:
+                node = node.right
+            elif p_val < parent_val and q_val < parent_val:
+                node = node.left
+            else:
+                return node
