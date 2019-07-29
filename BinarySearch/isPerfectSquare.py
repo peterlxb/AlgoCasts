@@ -9,7 +9,7 @@ class Solution(object):
         right = num
 
         while left <= right:
-            mid = left + (right - left )//2
+            mid = left + (right - left ) // 2
             if mid ** 2 == num:
                 return True
             elif mid ** 2 > num:

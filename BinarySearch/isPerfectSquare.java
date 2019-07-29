@@ -11,7 +11,7 @@
 
 class Solution {
   public boolean isPerfectSquare(int num) {
-    // 使用二分查找
+    // 使用二分查找的思路
     int low = 1, high = num;
     while (low <= high) {
       long mid = (low + high) >>> 1;
@@ -19,8 +19,10 @@ class Solution {
       if (mid * mid == num) {
         return true;
       } else if (mid * mid < num) {
+        // 如果这个mid平方小于num，左边界加1
         low = (int) mid + 1;
       } else {
+        // mid平方大于sum, 右边界减1
         high = (int) mid - 1;
       }
     }
