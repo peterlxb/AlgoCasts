@@ -1,4 +1,14 @@
-# 使用二分查找 和Java 版本原理一样
+"""
+判断一个数是不是有平方squart
+ Input: 16
+ Output: true
+
+ Input: 14
+ Output: false
+
+ 不能用内置的sqrt，使用二分查找法
+""" 
+
 class Solution(object):
     def isPerfectSquare(self, num):
         """
