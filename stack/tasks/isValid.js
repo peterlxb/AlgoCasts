@@ -12,15 +12,17 @@ var isValid = function(s) {
   for (let i = 0; i < s.length; i++) {
     // 如果是右向的字符，取出栈顶元素进行比较
     if (s[i] in mapping) {
+      // 取出栈顶元素
       const curr = stack.pop();
       // 这里 s[i] 是key ,mapping[s[i]] 获取到值，与 pop出来的栈顶元素进行比较
       if (mapping[s[i]] !== curr) {
         return false;
       }
     } else {
-      // 不是右向元素，push到栈中
+      // 不是右向元素，左向元素 push到栈中
       stack.push(s[i]);
     }
   }
+  // 栈为空说明匹配成功
   return !stack.length;
 };
