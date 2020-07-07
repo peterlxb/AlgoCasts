@@ -13,7 +13,6 @@
  可以假设nums大于 k-1 k大于等于1
  */
 
-
 class KthLargest {
   // 使用优先级队列
   final PriorityQueue<Integer> q;
