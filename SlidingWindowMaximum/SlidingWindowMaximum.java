@@ -1,10 +1,20 @@
 import java.util.Deque;
 import java.util.LinkedList;
 
-/**
- * MaxSlidingWinow
-*/
-class Solution {
+
+public class SlidingWindowMaximum {
+
+  public static void main(String[] args) {
+    System.out.println("Test maxSlidingWindow");
+
+    int[] list = {1,3,-1,-3,5,3,6,7};
+    int k = 3;
+    int[] res = maxSlidingWindow(list, k);
+
+    for (int element: res) {
+      System.out.println(element);
+    }
+  }
 
   /**
    * 
@@ -13,14 +23,14 @@ class Solution {
   Explanation: 
   Window position                Max
   ---------------               -----
-  [1  3  -1] -3  5  3  6  7       3
+  [1  3  -1] -3  5  3  6  7      3
   1 [3  -1  -3] 5  3  6  7       3
   1  3 [-1  -3  5] 3  6  7       5
   1  3  -1 [-3  5  3] 6  7       5
   1  3  -1  -3 [5  3  6] 7       6
   1  3  -1  -3  5 [3  6  7]      7
   */
-  public int[] maxSlidingWindow(int[] nums, int k) {
+  public static int[] maxSlidingWindow(int[] nums, int k) {
     if (nums == null || nums.length == 0) {
       return new int[0];
     }
@@ -41,9 +51,8 @@ class Solution {
       if (i - k + 1 >= windows.getFirst()) {
         windows.removeFirst();
       }
-      
-    }
 
+    }
     return res;
   }
 }
