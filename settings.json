@@ -1,0 +1,53 @@
+{
+  "editor.fontSize": 18,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "terminal.integrated.fontSize": 26,
+  "editor.formatOnPaste": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx"
+  },
+  "editor.formatOnSave": true,
+  "[javaScript]": {
+    "editor.formatOnSave": true
+  },
+  "window.zoomLevel": 0,
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "workbench.iconTheme": "vs-seti",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.startupEditor": "newUntitledFile",
+  "[typescript]": {},
+  "editor.suggestSelection": "first",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[go]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.integrated.shell.osx": "/bin/bash",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDelete": false,
+  "git.ignoreLegacyWarning": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "git.confirmSync": false,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "editor.accessibilityPageSize": 14,
+  "workbench.editorAssociations": [],
+  "editor.fontLigatures": true,
+  "workbench.colorTheme": "Noctis Minimus"
+}
